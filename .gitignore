@@ -12,6 +12,19 @@ images/
 !results/*.csv
 !carbon footprint/*.csv
 
+# Model checkpoints and generated model artifacts
+Lab_MAE_*/
+Lab_mae_*/
+ReMask_*/
+**/epoch*_checkpoint
+**/norm_parameters.pkl
+
+# Generated outputs for the ordering/abnormality experiment
+order_abnormality_experiment/data/*
+order_abnormality_experiment/results/*
+!order_abnormality_experiment/data/.gitkeep
+!order_abnormality_experiment/results/.gitkeep
+
 # macOS
 .DS_Store
 .AppleDouble

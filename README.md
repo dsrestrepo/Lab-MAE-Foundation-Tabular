@@ -13,6 +13,14 @@ This repository is organized as follows:
 - **run_test_mae.py**: Script to test the MAE model's performance on a given dataset.
 - **run_test_mae_race.py**: Script to test the MAE model's performance for the paper vs XGBoost models on a given test set and compare performance overall and per race.
 - **run_test_mae_race_follow_up.py**: Script to test the MAE model's performance for the paper vs XGBoost models on a given test set and compare performance with a follow-up data and without follow-up data overall and per race.
+- **ablations/**: Contains ablation training scripts for different mask ratios and model variants:
+  - **run_mae_15.py**
+  - **run_mae_50.py**
+  - **run_mae_75.py**
+  - **run_mae_85.py**
+  - **run_mae_no_time.py**
+  - **run_remask.py**
+- **order_abnormality_experiment/**: Contains the downstream experiment that uses Lab-MAE embeddings to predict next-day lab ordering and abnormality. See `order_abnormality_experiment/Ordet_Abnomality.md`.
 - **Notebook Demos**:
   - **mae_demo.ipynb**: Demonstrates the basic usage of the MAE model, including training and testing.
   - **mae_imputer_inference_demo.ipynb**: Explores how to use the trained MAE model for data imputation.
@@ -58,6 +66,40 @@ python run_mae.py
 ```
 
 This script will train the model on the provided dataset, saving the model weights and other relevant training artifacts.
+
+### Ablation Training Scripts
+
+The ablation scripts are in `ablations/`. Run them from the project root:
+
+```bash
+python ablations/run_mae_15.py
+python ablations/run_mae_50.py
+python ablations/run_mae_75.py
+python ablations/run_mae_85.py
+python ablations/run_mae_no_time.py
+python ablations/run_remask.py
+```
+
+These scripts still write their checkpoint/output folders at the project root, as before. Generated checkpoint folders such as `Lab_MAE_*`, `Lab_mae_*`, and `ReMask_*` are ignored by git.
+
+### Ordering and Abnormality Experiment
+
+The ordering/abnormality experiment lives in `order_abnormality_experiment/`.
+
+```bash
+cd order_abnormality_experiment
+python build_order_abnormality_dataset.py --max-rows 5000 --device mps
+python run_order_abnormality_experiment.py
+```
+
+Generated experiment data and plots are written to:
+
+```text
+order_abnormality_experiment/data/
+order_abnormality_experiment/results/
+```
+
+Those generated files are ignored by git, while the scripts, README, and empty folder placeholders are tracked.
 
 ### Use the Lab-MAE Checkpoint
 
@@ -132,7 +174,7 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 
 ### Contact
 
-If you have any questions or need further assistance, please feel free to contact me at anonymous@email.com
+If you have any questions or need further assistance, please feel free to contact me at davidres@mit.edu
 
 ## License
 
